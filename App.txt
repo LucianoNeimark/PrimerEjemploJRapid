@@ -1,0 +1,38 @@
+Persona
+
+    <filter display="primary" label="Nombre" name="filterNombre" property="nombre"/>
+    <filter display="primary" label="Apellido" name="filterApellido" property="apellido"/>
+    <filter display="primary" label="Edificio" name="filterEdificio" entity="Edificio" property="edificio"/>
+
+
+    nombre d
+    apellido d
+    edificio Edificio
+
+    <subset name="forEdificio">
+        <param name="edificio" entity="Edificio" />
+        <condition field="edificio" value="edificio" />
+    </subset>
+
+Edificio
+
+    <filter display="primary" label="Direccion" name="filterDireccion" property="direccion"/>
+    <filter display="primary" label="Ciudad" name="filterCiudad" entity="Ciudad" property="ciudad"/>
+
+
+    direccion d
+    provincia Provincia d
+    ciudad Ciudad subset="forProvincia" subsetparams="provincia" d
+    <embeddedlisting name="personas" subset="forEdificio" entity="Persona" subsetparams="." />
+
+Provincia @Configuracion
+	name d
+
+Ciudad @Configuracion
+	<subset name="forProvincia">
+		<param name="provincia" entity="Provincia" />
+		<condition field="provincia" value="provincia" />
+	</subset>
+
+	provincia Provincia
+    nombre d
